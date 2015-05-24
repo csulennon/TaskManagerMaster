@@ -55,7 +55,7 @@ public class FragmentHome extends Fragment {
 		mListView = (SwipeMenuListView) rootView.findViewById(R.id.homeListView);
 		mAdapter = new ListHomeAdapter(mTasks);
 		mListView.setAdapter(mAdapter);
-		
+
 		setListItemMenuClick();
 
 		mListView.setOnItemClickListener(new OnItemClickListener() {
@@ -137,7 +137,10 @@ public class FragmentHome extends Fragment {
 	}
 
 	protected Context getApplicationContext() {
-		return mActivity.getApplicationContext();
+		if (mActivity != null) {
+			return mActivity.getApplicationContext();
+		} 
+		return TaskManagerApp.getAppContext();
 	}
 
 	public List<Task> getAllTask() {

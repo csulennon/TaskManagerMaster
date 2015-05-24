@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#333"
+    android:gravity="center_vertical" >
+
+    <ImageButton
+        android:id="@+id/ibtn_icon"
+        android:layout_width="50dp"
+        android:layout_height="70dp"
+        android:background="#0000"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_doing" />
+
+    
+
+    <LinearLayout
+        android:id="@+id/vContainerBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:layout_alignParentRight="true"
+        android:orientation="horizontal" >
+
+        <ImageButton
+            android:id="@+id/ibtn_done"
+            android:layout_width="60dp"
+            android:layout_height="70dp"
+            android:background="@drawable/notyfy_btn_done_selector"
+            android:visibility="visible"
+            android:scaleX="1"
+            android:src="@drawable/ic_action_done" />
+
+        <ImageButton
+            android:id="@+id/ibtn_del"
+            android:layout_width="60dp"
+            android:layout_height="70dp"
+            android:background="@drawable/notyfy_btn_del_selector"
+            android:scaleX="1"
+            android:src="@drawable/ic_action_discard" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/vContainerText"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginLeft="3dp"
+        android:layout_toRightOf="@id/ibtn_icon"
+        android:layout_toLeftOf="@id/vContainerBtn"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="您有一项任务正在进行"
+            android:textColor="#fff"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tvContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:text="您有一项任务正在进行"
+            android:textColor="#eee"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+</RelativeLayout>

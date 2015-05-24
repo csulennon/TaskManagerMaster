@@ -95,10 +95,10 @@ public class MainActivity extends Activity implements OnClickListener {
 		IntentFilter intentFilter = new IntentFilter();
 		intentFilter.addAction(Constant.RECEIVER_UPDATE_UI);
 		registerReceiver(mUpdateUiReceiver, intentFilter);
-		
+
 		Intent intent = new Intent(this, BackUpdateService.class);
 		bindService(intent, conn, Context.BIND_AUTO_CREATE);
-		
+
 	}
 
 	private void initDatabase() {
@@ -256,7 +256,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		super.onResume();
 
 		mFragmentHome.reloadData();
-		
+
 	}
 
 	@Override
@@ -265,6 +265,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		if (mUpdateUiReceiver != null) {
 			unregisterReceiver(mUpdateUiReceiver);
 		}
+		unbindService(conn);
 	}
 
 	@Override
@@ -316,6 +317,5 @@ public class MainActivity extends Activity implements OnClickListener {
 				mFragmentHome.reloadData();
 			}
 		}
-
 	}
 }

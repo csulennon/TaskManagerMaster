@@ -1,5 +1,7 @@
 package com.kongderui.taskmanager.common;
 
+import android.content.Intent;
+
 public class Constant {
 	
 	public static String[] YEARS = {"2015","2016","2017","2018","2019","2020","2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030"};
@@ -10,4 +12,7 @@ public class Constant {
 	
 	public static String RECEIVER_UPDATE_UI = "com.kongderui.taskmanager.RECEIVER";
 	public static String RECEIVER_NEED_UPDATE_UI_KEY = "needupdateui";
+	
+	public static final String RECEIVER_NOTYFICATION = "com.kongderui.taskmanager.service.RECEIVER";
+	public static final String RECEIVER_NO_NOTYFI = "clearnotyfy";
 }
