@@ -88,7 +88,7 @@ public class FragmentHome extends Fragment {
 						Intent intent = new Intent(Intent.ACTION_SEND);
 						intent.setType("text/plain"); 
 						intent.putExtra(Intent.EXTRA_SUBJECT, "任务管理大师帮你改变懒惰"); 
-			            intent.putExtra(Intent.EXTRA_TEXT, "我做完了“"+task.getTitle()+"”这个任务， 下载任务管理大师（https://github.com/csulennon/TaskManagerMaster/blob/master/bin/taskmanager.apk?raw=true）一起在做任务吧！");
+			            intent.putExtra(Intent.EXTRA_TEXT, "我做完了“"+task.getTitle()+"”这个任务， 下载任务管理大师（https://github.com/csulennon/TaskManagerMaster/blob/master/bin/taskmanagermaster.apk?raw=true）一起在做任务吧！");
 			            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			            startActivity(Intent.createChooser(intent, mActivity.getTitle()));
 					}
