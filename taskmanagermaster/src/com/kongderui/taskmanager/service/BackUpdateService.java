@@ -105,13 +105,13 @@ public class BackUpdateService extends Service {
 					}
 
 					if (needUpdate) {
-						times++;
 						if ((times % 3) == 0) {
 							Intent intent = new Intent(Constant.RECEIVER_UPDATE_UI);
 							intent.putExtra(Constant.RECEIVER_NEED_UPDATE_UI_KEY, needUpdate);
 							sendBroadcast(intent);
-							times = 0;
+							times = 1;
 						}
+						times++;
 					}
 
 				} catch (InterruptedException e) {
