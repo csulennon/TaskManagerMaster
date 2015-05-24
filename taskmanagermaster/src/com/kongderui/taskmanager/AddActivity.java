@@ -45,6 +45,7 @@ public class AddActivity extends Activity implements OnClickListener {
 	public void back(View v) {
 		finish();
 	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -64,16 +65,17 @@ public class AddActivity extends Activity implements OnClickListener {
 			mWheelViewYear.setCurrentItem(calendar.get(Calendar.YEAR) - 2015);
 			mWheelViewMonth.setCurrentItem(calendar.get(Calendar.MONTH));
 			mWheelViewDay.setCurrentItem(calendar.get(Calendar.DATE));
-			mWheelViewHour.setCurrentItem(calendar.get(Calendar.HOUR));
+			mWheelViewHour.setCurrentItem(calendar.get(Calendar.HOUR_OF_DAY) + calendar.get(Calendar.AM_PM) * 12);
 			mWheelViewMinit.setCurrentItem(calendar.get(Calendar.MINUTE));
 			mWheelViewSecon.setCurrentItem(calendar.get(Calendar.SECOND));
 
-//			if (mIntentTask.getType() == Task.TYPE_HAVEDONE || mIntentTask.getType() == Task.TYPE_TIMEOUT) {
-//				mBtnSave.setVisibility(View.GONE);
-//			}
+			// if (mIntentTask.getType() == Task.TYPE_HAVEDONE ||
+			// mIntentTask.getType() == Task.TYPE_TIMEOUT) {
+			// mBtnSave.setVisibility(View.GONE);
+			// }
 			mTvTopTitle.setText("查看任务(" + mIntentTask.getTypeName() + ")");
 		}
-		
+
 	}
 
 	private void initViews() {
@@ -96,7 +98,7 @@ public class AddActivity extends Activity implements OnClickListener {
 		mWheelViewYear.setCurrentItem(c.get(Calendar.YEAR) - 2015);
 		mWheelViewMonth.setCurrentItem(c.get(Calendar.MONTH));
 		mWheelViewDay.setCurrentItem(c.get(Calendar.DATE));
-		mWheelViewHour.setCurrentItem(c.get(Calendar.HOUR));
+		mWheelViewHour.setCurrentItem(c.get(Calendar.HOUR) + c.get(Calendar.AM_PM) * 12);
 		mWheelViewMinit.setCurrentItem(c.get(Calendar.MINUTE));
 		mWheelViewSecon.setCurrentItem(0);
 
