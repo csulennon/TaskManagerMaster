@@ -12,7 +12,11 @@
 
 ![pic5](screen/another_swipe.png)
 
-你可以在这里下载demo[download](https://raw.githubusercontent.com/csulennon/TaskManagerMaster/master/bin/taskmanagermaster.apk)
+![pic6](screen/notify1.jpg)
+
+![pic7](screen/notify2.jpg)
+
+你可以在这里下载安装程序 [download](https://raw.githubusercontent.com/csulennon/TaskManagerMaster/master/bin/taskmanagermaster.apk)
 
 License
 -------
