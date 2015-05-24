@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <color name="main_color">#FF67B34F</color>    
+  <color name="white">#FFFFFFFF</color>
+  <color name="listview_line">#FF76c75c</color>
+  <color name="listview_press">#FFd0f7c4</color>
+  <color name="black">#FF000000</color>
+  
+  <string-array name="colors">
+        <item>#F2D06B</item>
+        <item>#F15441</item>
+        <item>#F28705</item>
+        <item>#BFA27E</item>
+        <item>#F23005</item>
+        <item>#BF1A0B</item>
+        <item>#590202</item>
+        <item>#BBBF34</item>
+        <item>#038C17</item>
+        <item>#2E707B</item>
+        <item>#5CC9CB</item>
+        <item>#CAF1E7</item>
+    </string-array>
+    
+  <!-- 背景颜色 -->
+    <color name="bg_light">#F9F9F9</color>
+    <color name="bg_light_2">#fafbff</color>
+    <color name="bg_light_deep">#E5E5E5</color>
+    <color name="bg_dark">#3d3d3d</color>
+    <color name="bg_light_dark">#595959</color>
+    
+    
+    <color name="top_nav_color">#2196f3</color>
+     <color name="red_bg">#ff5252</color>
+    
+    <!-- 常用颜色 -->
+    <color name="color_red_1">#E74C37</color>
+    <color name="color_green_1">#08d386</color>
+    <color name="color_green_2">#18bc9a</color>
+    <color name="color_green_360">#0ab044</color>
+    
+  
+</resources>

@@ -1,0 +1,194 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:my="http://schemas.android.com/apk/res/com.kongderui.taskmanager"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:layout_marginTop="10dp" >
+
+    <LinearLayout
+        android:id="@+id/tasktitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="任务名称："
+            android:textColor="#000"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/etTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="任务名称" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/startTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tasktitle"
+        android:layout_marginTop="10dp"
+        android:text="开始时间："
+        android:textColor="#000"
+        android:textSize="18sp" />
+
+    <LinearLayout
+        android:id="@+id/startTimePicker"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_below="@id/startTime"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <com.kongderui.ui.wheel.WheelView
+            android:id="@+id/wheelyear"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:padding="0dp"
+            my:labelSize="@dimen/wheel_view_label_size"
+            my:textSize="18sp" >
+        </com.kongderui.ui.wheel.WheelView>
+
+        <TextView
+            android:layout_width="15dp"
+            android:layout_height="match_parent"
+            android:layout_margin="0dp"
+            android:gravity="center"
+            android:padding="0dp"
+            android:text="年"
+            android:textSize="15sp" />
+
+        <com.kongderui.ui.wheel.WheelView
+            android:id="@+id/wheelmonth"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:padding="0dp"
+            my:labelSize="@dimen/wheel_view_label_size"
+            my:textSize="14sp" >
+        </com.kongderui.ui.wheel.WheelView>
+
+        <TextView
+            android:layout_width="15dp"
+            android:layout_height="match_parent"
+            android:layout_margin="0dp"
+            android:gravity="center"
+            android:padding="0dp"
+            android:text="月"
+            android:textSize="15sp" />
+
+        <com.kongderui.ui.wheel.WheelView
+            android:id="@+id/wheelday"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:padding="0dp"
+            my:labelSize="@dimen/wheel_view_label_size"
+            my:textSize="14sp" >
+        </com.kongderui.ui.wheel.WheelView>
+
+        <TextView
+            android:layout_width="15dp"
+            android:layout_height="match_parent"
+            android:layout_margin="0dp"
+            android:gravity="center"
+            android:padding="0dp"
+            android:text="日"
+            android:textSize="15sp" />
+
+        <com.kongderui.ui.wheel.WheelView
+            android:id="@+id/wheelH"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:padding="0dp"
+            my:labelSize="@dimen/wheel_view_label_size"
+            my:textSize="14sp" >
+        </com.kongderui.ui.wheel.WheelView>
+
+        <TextView
+            android:layout_width="15dp"
+            android:layout_height="match_parent"
+            android:layout_margin="0dp"
+            android:gravity="center"
+            android:padding="0dp"
+            android:text="时"
+            android:textSize="15sp" />
+
+        <com.kongderui.ui.wheel.WheelView
+            android:id="@+id/wheelM"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:padding="0dp"
+            my:labelSize="@dimen/wheel_view_label_size"
+            my:textSize="14sp" >
+        </com.kongderui.ui.wheel.WheelView>
+
+        <TextView
+            android:layout_width="15dp"
+            android:layout_height="match_parent"
+            android:layout_margin="0dp"
+            android:gravity="center"
+            android:padding="0dp"
+            android:text="分"
+            android:textSize="15sp" />
+
+        <com.kongderui.ui.wheel.WheelView
+            android:id="@+id/wheelS"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:padding="0dp"
+            my:labelSize="@dimen/wheel_view_label_size"
+            my:textSize="14sp" >
+        </com.kongderui.ui.wheel.WheelView>
+
+        <TextView
+            android:layout_width="15dp"
+            android:layout_height="match_parent"
+            android:layout_margin="0dp"
+            android:gravity="center"
+            android:padding="0dp"
+            android:text="秒"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/vDuration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/startTimePicker"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal" >
+
+        <EditText
+            android:id="@+id/etDuration"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="多少分钟" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/vDuration"
+        android:layout_marginTop="10dp" >
+
+        <EditText
+            android:id="@+id/etContent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="任务描述任务描述任务描述任务描述任务描述任务描述任务描述任务描述任务描述任务描述任务描述任务描述任务描述任务描述任务描述"
+            android:singleLine="false"
+            android:textColor="#000"
+            android:textSize="18sp" />
+    </ScrollView>
+</RelativeLayout>

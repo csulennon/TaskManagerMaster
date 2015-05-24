@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">任务管理大师</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_add">添加任务</string>
+    <string name="copyright">Copyright © 2014 Task Manager Master. All Rights Reserved.</string>
+    <string name="email">作者邮箱：csulennon@163.com</string>
+    <string name="email1">作者邮箱：784096824@qq.com</string>
+
+</resources>

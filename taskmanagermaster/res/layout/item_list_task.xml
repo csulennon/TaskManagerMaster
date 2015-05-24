@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical"
+    android:background="@drawable/item_selector"
+    android:padding="8dp" >
+
+    <ImageView
+        android:id="@+id/ivItemIcon"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_launcher" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/ivItemIcon"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tvItemTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            
+            android:text="name"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+        
+        <TextView
+            android:id="@+id/tvItemContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="今天你妈妈叫你回家要吃饭的，吃什么好呢？还是蛋炒饭吧。"
+            android:singleLine="true"
+            android:textColor="#222"
+            android:textSize="14sp" />
+        
+        <TextView
+            android:id="@+id/tvItemTime"
+            android:gravity="right"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="开始时间：2015-05-23 23:11:11"
+            android:textColor="#444"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+</RelativeLayout>
