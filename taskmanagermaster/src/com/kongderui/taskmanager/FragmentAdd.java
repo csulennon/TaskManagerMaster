@@ -50,11 +50,10 @@ public class FragmentAdd extends Fragment {
 
 		Calendar c = Calendar.getInstance();
 		c.setTimeInMillis(c.getTimeInMillis() + 1000 * 60);
-		TMLog.i(c.get(Calendar.YEAR) + " " + c.get(Calendar.MONTH) + " " + c.DATE + " " + c.HOUR + " " + c.MINUTE + " " + c.SECOND);
 		mWheelViewYear.setCurrentItem(c.get(Calendar.YEAR) - 2015);
 		mWheelViewMonth.setCurrentItem(c.get(Calendar.MONTH));
 		mWheelViewDay.setCurrentItem(c.get(Calendar.DATE));
-		mWheelViewHour.setCurrentItem(c.get(Calendar.HOUR));
+		mWheelViewHour.setCurrentItem(c.get(Calendar.HOUR_OF_DAY));
 		mWheelViewMinit.setCurrentItem(c.get(Calendar.MINUTE));
 		mWheelViewSecon.setCurrentItem(0);
 

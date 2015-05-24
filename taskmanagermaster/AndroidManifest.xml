@@ -41,6 +41,8 @@
             android:theme="@android:style/Theme.Black.NoTitleBar"
             android:windowSoftInputMode="adjustPan" >
         </activity>
+        
+        <service android:name="com.kongderui.taskmanager.service.BackUpdateService"></service>
     </application>
 
 </manifest>

@@ -8,17 +8,28 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.BroadcastReceiver;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.IBinder;
+import android.os.SystemClock;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.kongderui.taskmanager.bean.Task;
+import com.kongderui.taskmanager.common.Constant;
 import com.kongderui.taskmanager.db.DBHelper;
 import com.kongderui.taskmanager.db.TaskDAO;
 import com.kongderui.taskmanager.db.impl.TaskDAOImpl;
+import com.kongderui.taskmanager.service.BackUpdateService;
 import com.kongderui.taskmanager.util.DateTimeUtils;
 
 public class MainActivity extends Activity implements OnClickListener {
@@ -29,6 +40,8 @@ public class MainActivity extends Activity implements OnClickListener {
 	private static final int PAGE_HOME = 5;
 
 	private DBHelper mDBhelper = null;
+
+	long[] mHits = new long[2];// 点击次数
 
 	private FragmentManager mFragmentManager = null;
 	private FragmentTransaction mTransaction = null;
@@ -56,6 +69,10 @@ public class MainActivity extends Activity implements OnClickListener {
 
 	private TextView mTvTitle = null;
 
+	private ServiceConnection conn = new BackUpdateServiceConn();
+	private BackUpdateService mBackUpdateService = null;
+	private UpdateUiReceiver mUpdateUiReceiver = null;
+
 	public static int mCurrentPageIndex = PAGE_HOME;
 
 	@Override
@@ -73,6 +90,15 @@ public class MainActivity extends Activity implements OnClickListener {
 		mFragmentHome.setActivity(this);
 		mTransaction.add(R.id.container, mFragmentHome);
 		mTransaction.commit();
+
+		mUpdateUiReceiver = new UpdateUiReceiver();
+		IntentFilter intentFilter = new IntentFilter();
+		intentFilter.addAction(Constant.RECEIVER_UPDATE_UI);
+		registerReceiver(mUpdateUiReceiver, intentFilter);
+		
+		Intent intent = new Intent(this, BackUpdateService.class);
+		bindService(intent, conn, Context.BIND_AUTO_CREATE);
+		
 	}
 
 	private void initDatabase() {
@@ -173,7 +199,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		Fragment fragment = null;
 		switch (currentPageIndex) {
 		case PAGE_DOING:
-			//mTopBtnRightView.setVisibility(View.VISIBLE);
+			// mTopBtnRightView.setVisibility(View.VISIBLE);
 			mTvTitle.setText("添加任务");
 			if (mFragmentAdd == null) {
 				mFragmentAdd = new FragmentAdd();
@@ -230,12 +256,66 @@ public class MainActivity extends Activity implements OnClickListener {
 		super.onResume();
 
 		mFragmentHome.reloadData();
-		mFragmentHome.startBackUpdate();
+		
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		if (mUpdateUiReceiver != null) {
+			unregisterReceiver(mUpdateUiReceiver);
+		}
 	}
 
 	@Override
 	protected void onPause() {
 		super.onPause();
-		mFragmentHome.stopBackUpdate();
+		// mFragmentHome.stopBackUpdate();
+	}
+
+	class BackUpdateServiceConn implements ServiceConnection {
+
+		@Override
+		public void onServiceConnected(ComponentName name, IBinder service) {
+			mBackUpdateService = ((BackUpdateService.ServiceBinder) service).getService();
+		}
+
+		@Override
+		public void onServiceDisconnected(ComponentName arg0) {
+		}
+
+	}
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+
+			System.arraycopy(mHits, 1, mHits, 0, mHits.length - 1);
+			mHits[mHits.length - 1] = SystemClock.uptimeMillis();
+			if (mHits[0] > (SystemClock.uptimeMillis() - 300)) {
+
+				Intent home = new Intent(Intent.ACTION_MAIN);
+				home.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				home.addCategory(Intent.CATEGORY_HOME);
+				startActivity(home);
+
+			} else {
+				Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+			}
+		}
+		return true;
+	}
+
+	class UpdateUiReceiver extends BroadcastReceiver {
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			boolean needUpdate = false;
+			needUpdate = intent.getBooleanExtra(Constant.RECEIVER_NEED_UPDATE_UI_KEY, false);
+			if (needUpdate) {
+				mFragmentHome.reloadData();
+			}
+		}
+
 	}
 }
