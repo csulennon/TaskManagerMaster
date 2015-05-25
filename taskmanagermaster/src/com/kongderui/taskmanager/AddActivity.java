@@ -1,6 +1,7 @@
 package com.kongderui.taskmanager;
 
 import java.util.Calendar;
+import java.util.Date;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -17,6 +18,7 @@ import com.kongderui.taskmanager.bean.Task;
 import com.kongderui.taskmanager.common.Constant;
 import com.kongderui.taskmanager.db.TaskDAO;
 import com.kongderui.taskmanager.db.impl.TaskDAOImpl;
+import com.kongderui.taskmanager.util.DateTimeUtils;
 import com.kongderui.taskmanager.util.TMLog;
 import com.kongderui.ui.wheel.StrericWheelAdapter;
 import com.kongderui.ui.wheel.WheelView;
@@ -61,11 +63,12 @@ public class AddActivity extends Activity implements OnClickListener {
 			mEtTitle.setText(mIntentTask.getTitle());
 			mEtMinuts.setText(mIntentTask.getDuration() + "");
 			mEtContent.setText(mIntentTask.getContent());
-
+			
+			String h = DateTimeUtils.getFormatDateTime(calendar.getTimeInMillis()).substring(11, 13);
 			mWheelViewYear.setCurrentItem(calendar.get(Calendar.YEAR) - 2015);
 			mWheelViewMonth.setCurrentItem(calendar.get(Calendar.MONTH));
 			mWheelViewDay.setCurrentItem(calendar.get(Calendar.DATE));
-			mWheelViewHour.setCurrentItem(calendar.get(Calendar.HOUR_OF_DAY) + calendar.get(Calendar.AM_PM) * 12);
+			mWheelViewHour.setCurrentItem(Integer.parseInt(h));
 			mWheelViewMinit.setCurrentItem(calendar.get(Calendar.MINUTE));
 			mWheelViewSecon.setCurrentItem(calendar.get(Calendar.SECOND));
 

@@ -27,11 +27,13 @@ public class TaskChangeNotyfication {
 	private Notification mNotification = null;
 	private Intent mBtnDelIntent = null;
 	private Intent mBtnDoneIntent = null;
+	private int mSDKVersion = 0;
 
 	TaskChangeNotyfication(Context context) {
 		super();
 		mContext = context;
 		mManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+		mSDKVersion = BaseTools.getSystemVersion();
 	}
 
 	public void startNotyfy() {
@@ -73,11 +75,11 @@ public class TaskChangeNotyfication {
 			mRemoteViews.setImageViewResource(R.id.ibtn_icon, R.drawable.ic_doing);
 			mRemoteViews.setTextViewText(R.id.tvTitle, "任务进行中，请尽快完成");
 			int timeSecondDiff = (int) ((task.getEndTime() - System.currentTimeMillis()) / 1000);
-			mRemoteViews.setTextViewText(R.id.tvContent, "《" + task.getTitle() + "》:" + task.getContent() + "，将在" + DateTimeUtils.getHumanReadableTimeString(timeSecondDiff)
-					+ " 结束。");
+			String strContent = "{" + task.getTitle() + "}:" + task.getContent() + "，将在" + DateTimeUtils.getHumanReadableTimeString(timeSecondDiff) + " 结束。";
+			mRemoteViews.setTextViewText(R.id.tvContent, strContent);
 
-			// /////////////////////////////////////////////////////////////////
-			if (BaseTools.getSystemVersion() > 9) {
+			// =============================================================
+			if (mSDKVersion > 9) {
 				mRemoteViews.setViewVisibility(R.id.ibtn_done, View.VISIBLE);
 				mRemoteViews.setViewVisibility(R.id.ibtn_del, View.VISIBLE);
 
@@ -93,16 +95,17 @@ public class TaskChangeNotyfication {
 			mRemoteViews.setImageViewResource(R.id.ibtn_icon, R.drawable.ic_timeout);
 			mRemoteViews.setTextViewText(R.id.tvTitle, "一项任务未完成，已锁定");
 			mRemoteViews.setTextViewText(R.id.tvContent, "《" + task.getTitle() + "》:" + task.getContent() + "， 开始于：" + DateTimeUtils.getFormatDateTime(task.getEndTime()));
-			if (BaseTools.getSystemVersion() > 9) {
+			if (mSDKVersion > 9) {
 				mRemoteViews.setViewVisibility(R.id.ibtn_done, View.GONE);
 			}
 		}
-		// /////////////////////////////////////////////////////////////////
-		if (BaseTools.getSystemVersion() > 9) {
+		
+		// =============================================================
+		if (mSDKVersion > 9) {
 			mBtnDelIntent = new Intent(Constant.RECEIVER_NOTYFICATION);
 			mBtnDelIntent.putExtra("del", task.getId());
 			mBtnDelIntent.putExtra("type", "del");
-			
+
 			PendingIntent pendingIntent = PendingIntent.getBroadcast(mContext, 2, mBtnDelIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 			mRemoteViews.setOnClickPendingIntent(R.id.ibtn_del, pendingIntent);
 			mRemoteViews.setViewVisibility(R.id.ibtn_del, View.VISIBLE);
@@ -112,8 +115,8 @@ public class TaskChangeNotyfication {
 	}
 
 	public void clear(int id) {
-		//mNotification.flags = Notification.FLAG_AUTO_CANCEL;
-		//mManager.notify(id, mNotification);
+		// mNotification.flags = Notification.FLAG_AUTO_CANCEL;
+		// mManager.notify(id, mNotification);
 		mManager.cancel(id);
 	}
 

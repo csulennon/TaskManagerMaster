@@ -12,6 +12,10 @@ public class TMLog {
 		Log.i("TMInfo:", msg);
 	}
 	
+	public static void i(int msg) {
+		Log.i("TMInfo:", msg+"");
+	}
+	
 	public static void w(String msg) {
 		Log.w("TMWarning:", msg);
 	}
