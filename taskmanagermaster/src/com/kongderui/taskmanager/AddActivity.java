@@ -97,7 +97,7 @@ public class AddActivity extends Activity implements OnClickListener {
 		c.setTimeInMillis(c.getTimeInMillis() + 1000 * 60);
 		mWheelViewYear.setCurrentItem(c.get(Calendar.YEAR) - 2015);
 		mWheelViewMonth.setCurrentItem(c.get(Calendar.MONTH));
-		mWheelViewDay.setCurrentItem(c.get(Calendar.DATE));
+		mWheelViewDay.setCurrentItem(c.get(Calendar.DATE) - 1);
 		mWheelViewHour.setCurrentItem(c.get(Calendar.HOUR) + c.get(Calendar.AM_PM) * 12);
 		mWheelViewMinit.setCurrentItem(c.get(Calendar.MINUTE));
 		mWheelViewSecon.setCurrentItem(0);
@@ -195,7 +195,7 @@ public class AddActivity extends Activity implements OnClickListener {
 		String startTimeStr = mWheelViewYear.getCurrentItemValue() + "-" + mWheelViewMonth.getCurrentItemValue() + "-" + mWheelViewDay.getCurrentItemValue() + " "
 				+ mWheelViewHour.getCurrentItemValue() + ":" + mWheelViewMinit.getCurrentItemValue() + ":" + mWheelViewSecon.getCurrentItemValue();
 		int year = Integer.parseInt(mWheelViewYear.getCurrentItemValue());
-		int month = Integer.parseInt(mWheelViewMonth.getCurrentItemValue());
+		int month = Integer.parseInt(mWheelViewMonth.getCurrentItemValue()) - 1;
 		int day = Integer.parseInt(mWheelViewDay.getCurrentItemValue());
 		int hour = Integer.parseInt(mWheelViewHour.getCurrentItemValue());
 		int min = Integer.parseInt(mWheelViewMinit.getCurrentItemValue());
