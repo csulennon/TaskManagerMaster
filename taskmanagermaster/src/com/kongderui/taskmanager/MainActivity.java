@@ -242,6 +242,8 @@ public class MainActivity extends Activity implements OnClickListener {
 		default:
 			break;
 		}
+		
+		mFragmentHome.startAnim();
 
 		// mTransaction = mFragmentManager.beginTransaction();
 		// mTransaction.replace(R.id.container, fragment);
@@ -293,7 +295,7 @@ public class MainActivity extends Activity implements OnClickListener {
 
 			System.arraycopy(mHits, 1, mHits, 0, mHits.length - 1);
 			mHits[mHits.length - 1] = SystemClock.uptimeMillis();
-			if (mHits[0] > (SystemClock.uptimeMillis() - 300)) {
+			if (mHits[0] > (SystemClock.uptimeMillis() - 500)) {
 
 				Intent home = new Intent(Intent.ACTION_MAIN);
 				home.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

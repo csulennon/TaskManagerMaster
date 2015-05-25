@@ -73,7 +73,7 @@ public class TaskChangeNotyfication {
 
 		if (task.getType() == Task.TYPE_DOING) {
 			mRemoteViews.setImageViewResource(R.id.ibtn_icon, R.drawable.ic_doing);
-			mRemoteViews.setTextViewText(R.id.tvTitle, "任务进行中，请尽快完成");
+			mRemoteViews.setTextViewText(R.id.tvTitle, "任务进行中");
 			int timeSecondDiff = (int) ((task.getEndTime() - System.currentTimeMillis()) / 1000);
 			String strContent = "{" + task.getTitle() + "}:" + task.getContent() + "，将在" + DateTimeUtils.getHumanReadableTimeString(timeSecondDiff) + " 结束。";
 			mRemoteViews.setTextViewText(R.id.tvContent, strContent);
@@ -93,7 +93,7 @@ public class TaskChangeNotyfication {
 
 		} else if (task.getType() == Task.TYPE_TIMEOUT) {
 			mRemoteViews.setImageViewResource(R.id.ibtn_icon, R.drawable.ic_timeout);
-			mRemoteViews.setTextViewText(R.id.tvTitle, "一项任务未完成，已锁定");
+			mRemoteViews.setTextViewText(R.id.tvTitle, "任务未完成，已锁定");
 			mRemoteViews.setTextViewText(R.id.tvContent, "《" + task.getTitle() + "》:" + task.getContent() + "， 开始于：" + DateTimeUtils.getFormatDateTime(task.getEndTime()));
 			if (mSDKVersion > 9) {
 				mRemoteViews.setViewVisibility(R.id.ibtn_done, View.GONE);

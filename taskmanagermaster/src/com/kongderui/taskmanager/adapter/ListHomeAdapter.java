@@ -115,5 +115,7 @@ public class ListHomeAdapter extends BaseAdapter {
 			view.setTag(this);
 		}
 	}
+	
+	
 
 }
