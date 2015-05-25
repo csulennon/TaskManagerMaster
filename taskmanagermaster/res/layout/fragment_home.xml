@@ -9,6 +9,8 @@
         android:layout_width="match_parent"
         android:layoutAnimation="@anim/list_anim_layout"
         android:scrollbarStyle="outsideInset"
+        android:divider="@color/bg_light"
+        android:dividerHeight="2dp"
         android:layout_height="match_parent" />
 
 </RelativeLayout>

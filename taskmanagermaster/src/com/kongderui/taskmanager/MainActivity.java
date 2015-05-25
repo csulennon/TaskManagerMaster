@@ -232,7 +232,7 @@ public class MainActivity extends Activity implements OnClickListener {
 			break;
 		case PAGE_TODO:
 			mTopBtnRightView.setVisibility(View.GONE);
-			mTvTitle.setText("待完成任务");
+			mTvTitle.setText("未开始任务");
 			if (mFragmentTodo == null) {
 				mFragmentTodo = new FragmentTodo();
 			}
