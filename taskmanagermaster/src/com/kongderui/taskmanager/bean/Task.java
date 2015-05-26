@@ -12,6 +12,7 @@ public class Task  implements Serializable{
 	public static final int TYPE_TIMEOUT = 3;
 	public static final int TYPE_UNKNOWN = 4;
 	public static final int TYPE_ALL = 5;
+	public static final int TYPE_NONE = 6;
 	
 	
 	private int id;
@@ -170,6 +171,10 @@ public class Task  implements Serializable{
 			
 		case TYPE_UNKNOWN:
 			strType = "δ֪";
+			break;
+			
+		case TYPE_NONE:
+			strType = "��ʼ״̬";
 			break;
 
 		default:

@@ -16,11 +16,11 @@ public class TaskDAOImpl implements TaskDAO {
 	private static final String SQL_INSERT_TASK = "insert into task(title, content, type, starttime, endtime, duration) values(?,?,?,?,?,?)";
 	public static final String SQL_DELETE_BY_ID = "delete from task where _id=?";
 	public static final String SQL_DELETE_BY_title = "delete from task where title=?";
-	private static final String SQL_FIND_ALL = "select * from task order by _id desc";
+	private static final String SQL_FIND_ALL = "select * from task order by starttime desc";
 	private static final String SQL_UPDATE_BY_ID = "update task set type=?,endtime=? where _id=? ";
 	private static final String SQL_UPDATE_BY_ID2 = "update task set type=? where _id=? ";
 	private static final String SQL_UPDATE_BY_ID3 = "update task set title=?,content=?,type=?,starttime=?,endtime=?, duration=? where _id=? ";;
-	private static final String SQL_FIND_BY_TYPE = "select * from task where type=? order by _id desc";
+	private static final String SQL_FIND_BY_TYPE = "select * from task where type=? order by starttime desc";
 	private static DBHelper mHelper = DBHelper.getInstance();
 	SQLiteDatabase db = null;
 

@@ -2,8 +2,10 @@ package com.kongderui.taskmanager.adapter;
 
 import java.util.List;
 
+import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,9 +18,12 @@ import com.kongderui.taskmanager.util.DateTimeUtils;
 public class ListHomeAdapter extends BaseAdapter {
 
 	private List<Task> mTasks = null;
+	private String mPreDateStr = null;
+	private Context mContext = null;
 
-	public ListHomeAdapter(List<Task> tasks) {
+	public ListHomeAdapter(List<Task> tasks, Context context) {
 		mTasks = tasks;
+		mContext = context;
 	}
 
 	@Override
@@ -38,7 +43,7 @@ public class ListHomeAdapter extends BaseAdapter {
 
 	@Override
 	public int getViewTypeCount() {
-		return 4;
+		return 7;
 	}
 
 	@Override
@@ -48,17 +53,32 @@ public class ListHomeAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
+		Task task = getItem(position);
+		String dateStr = DateTimeUtils.getFormatDateTime(task.getStartTime()).substring(0, 10);
+
 		if (convertView == null) {
 			convertView = View.inflate(TaskManagerApp.getAppContext(), R.layout.item_list_task, null);
 			new ViewHolder(convertView);
 		}
 		ViewHolder holder = (ViewHolder) convertView.getTag();
-		Task task = getItem(position);
+
+		if (task.getType() == Task.TYPE_NONE) {
+			holder.ivItemIcon.setVisibility(View.GONE);
+			holder.vItemContainer.setVisibility(View.GONE);
+			holder.vCalendar.setVisibility(View.VISIBLE);
+		} else {
+			holder.ivItemIcon.setVisibility(View.VISIBLE);
+			holder.vItemContainer.setVisibility(View.VISIBLE);
+			holder.vCalendar.setVisibility(View.GONE);
+		}
+		holder.tvCalendar.setText(dateStr);
+
 		holder.ivItemIcon.setImageResource(getInconResource(task.getType()));
 		holder.tvItemTitle.setText(task.getTitle());
 		holder.tvItemContent.setText(task.getContent());
 		String itemTimeStr = getTimeDecla(task);
 		holder.tvItemTime.setText(itemTimeStr);
+
 		return convertView;
 	}
 
@@ -107,15 +127,20 @@ public class ListHomeAdapter extends BaseAdapter {
 		TextView tvItemContent;
 		TextView tvItemTime;
 
+		TextView tvCalendar;
+		View vItemContainer;
+		View vCalendar;
+
 		public ViewHolder(View view) {
 			ivItemIcon = (ImageView) view.findViewById(R.id.ivItemIcon);
 			tvItemTitle = (TextView) view.findViewById(R.id.tvItemTitle);
 			tvItemContent = (TextView) view.findViewById(R.id.tvItemContent);
 			tvItemTime = (TextView) view.findViewById(R.id.tvItemTime);
+			tvCalendar = (TextView) view.findViewById(R.id.tvCalendar);
+			vItemContainer = view.findViewById(R.id.vItemContainer);
+			vCalendar = view.findViewById(R.id.vCalendar);
 			view.setTag(this);
 		}
 	}
-	
-	
 
 }

@@ -26,6 +26,7 @@ import com.kongderui.taskmanager.adapter.ListHomeAdapter;
 import com.kongderui.taskmanager.bean.Task;
 import com.kongderui.taskmanager.db.TaskDAO;
 import com.kongderui.taskmanager.db.impl.TaskDAOImpl;
+import com.kongderui.taskmanager.util.DateTimeUtils;
 import com.kongderui.taskmanager.util.ScreenUtils;
 import com.kongderui.ui.swipemenulistview.SwipeMenu;
 import com.kongderui.ui.swipemenulistview.SwipeMenuCreator;
@@ -57,12 +58,39 @@ public class FragmentHome extends Fragment {
 		mTasks = getAllTask();
 
 		mListView = (SwipeMenuListView) rootView.findViewById(R.id.homeListView);
-		mAdapter = new ListHomeAdapter(mTasks);
+		mAdapter = new ListHomeAdapter(mTasks, mActivity);
 		mListView.setAdapter(mAdapter);
 
 		setListItemMenuClick();
-		setListItemClickListener();
+		setListItemClickListener();// 设置List的点击事件
+		setListItemAnim();// 设置动画
 
+		if (creator == null) {
+			creator = new SwipeMenuCreator() {
+				@Override
+				public void create(SwipeMenu menu) {
+					switch (menu.getViewType()) {
+					case Task.TYPE_TODO:
+					case Task.TYPE_DOING:
+						createMenuTodoAndDoing(menu);
+						break;
+					case Task.TYPE_HAVEDONE:
+						createMenuHaveDone(menu);
+						break;
+					case Task.TYPE_TIMEOUT:
+					case Task.TYPE_UNKNOWN:
+						createMenuOuttime(menu);
+						break;
+					}
+				}
+			};
+		}
+
+		mListView.setMenuCreator(creator);
+		return rootView;
+	}
+
+	private void setListItemAnim() {
 		mListView.setOnScrollListener(new OnScrollListener() {
 
 			int first = 0;
@@ -92,35 +120,9 @@ public class FragmentHome extends Fragment {
 						v.startAnimation(mAnimUp);
 					}
 				}
-
 				first = firstVisibleItem;
-
 			}
 		});
-
-		if (creator == null) {
-			creator = new SwipeMenuCreator() {
-				@Override
-				public void create(SwipeMenu menu) {
-					switch (menu.getViewType()) {
-					case Task.TYPE_TODO:
-					case Task.TYPE_DOING:
-						createMenu1(menu);
-						break;
-					case Task.TYPE_HAVEDONE:
-						createMenuHaveDone(menu);
-						break;
-					case Task.TYPE_TIMEOUT:
-					case Task.TYPE_UNKNOWN:
-						createMenu3(menu);
-						break;
-					}
-				}
-			};
-		}
-
-		mListView.setMenuCreator(creator);
-		return rootView;
 	}
 
 	private void setListItemClickListener() {
@@ -129,6 +131,10 @@ public class FragmentHome extends Fragment {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				Task task = mTasks.get(position);
+
+				if (task.getType() == Task.TYPE_NONE) {
+					return;
+				}
 				Intent intent = new Intent(mActivity, AddActivity.class);
 				Bundle bundle = new Bundle();
 				bundle.putSerializable("task", task);
@@ -197,9 +203,34 @@ public class FragmentHome extends Fragment {
 	public void reloadData() {
 		List<Task> tasks = getAllTask();
 		mTasks.clear();
-		for (Task task : tasks) {
+		if(tasks.size() == 0) {
+			mActivity.vNothing.setVisibility(View.VISIBLE);
+		} else {
+			mActivity.vNothing.setVisibility(View.GONE);
+		}
+
+		for (int i = 0; i < tasks.size(); i++) {
+			Task task = tasks.get(i);
+			String dateStr = DateTimeUtils.getFormatDateTime(task.getStartTime()).substring(0, 10);
+			if (i == 0) {
+				Task tskAdd = new Task();
+				tskAdd.setStartTime(task.getStartTime());
+				tskAdd.setType(Task.TYPE_NONE);
+				mTasks.add(tskAdd);
+			} else {
+				Task taskPre = tasks.get(i - 1);
+				String datePreStr = DateTimeUtils.getFormatDateTime(taskPre.getStartTime()).substring(0, 10);
+				if (!dateStr.equals(datePreStr)) {
+					Task tskAdd = new Task();
+					tskAdd.setStartTime(task.getStartTime());
+					tskAdd.setType(Task.TYPE_NONE);
+					mTasks.add(tskAdd);
+				}
+			}
+			System.out.println(dateStr);
 			mTasks.add(task);
 		}
+
 		mAdapter.notifyDataSetChanged();
 	}
 
@@ -211,7 +242,7 @@ public class FragmentHome extends Fragment {
 		mAdapter.notifyDataSetChanged();
 	}
 
-	private void createMenu3(SwipeMenu menu) {
+	private void createMenuOuttime(SwipeMenu menu) {
 		SwipeMenuItem item2 = new SwipeMenuItem(getApplicationContext());
 		item2.setBackground(new ColorDrawable(Color.rgb(0xFf, 0x52, 0x52)));
 		item2.setWidth(ScreenUtils.dp2px(mActivity, 90));
@@ -234,7 +265,7 @@ public class FragmentHome extends Fragment {
 
 	}
 
-	private void createMenu1(SwipeMenu menu) {
+	private void createMenuTodoAndDoing(SwipeMenu menu) {
 		SwipeMenuItem item1 = new SwipeMenuItem(mActivity.getApplicationContext());
 		item1.setBackground(new ColorDrawable(Color.rgb(0x66, 0x66, 0x66)));
 		item1.setWidth(ScreenUtils.dp2px(mActivity, 90));

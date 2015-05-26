@@ -2,41 +2,66 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="center_vertical"
-    android:background="@drawable/item_selector"
-    android:padding="8dp"
-    >
+    android:background="@drawable/item_selector" >
+
+    <LinearLayout
+        android:id="@+id/vCalendar"
+        android:layout_width="match_parent"
+        android:layout_height="81dp"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tvCalendar"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="#fff"
+            android:textSize="16sp"
+            android:gravity="center_horizontal|bottom"
+            android:text="2015-05-26 12:12:12"
+            android:textColor="#28af63" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#666" />
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/ivItemIcon"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:layout_below="@id/vCalendar"
         android:layout_centerVertical="true"
+        android:layout_marginTop="8dp"
         android:src="@drawable/ic_launcher" />
 
     <LinearLayout
+        android:id="@+id/vItemContainer"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
+        android:layout_below="@id/vCalendar"
+        android:layout_marginBottom="8dp"
         android:layout_marginLeft="5dp"
+        android:layout_marginTop="8dp"
         android:layout_toRightOf="@id/ivItemIcon"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:padding="8dp" >
 
         <TextView
             android:id="@+id/tvItemTitle"
             android:layout_width="match_parent"
-            android:layout_height="25dp"
+            android:layout_height="wrap_content"
             android:text="name"
-            android:textColor="@android:color/black"
-            android:textSize="18sp" />
+            android:textColor="#000"
+            android:textSize="22sp" />
 
         <TextView
             android:id="@+id/tvItemContent"
             android:layout_width="match_parent"
-            android:layout_height="15dp"
-            android:singleLine="true"
-            android:text="今天你妈妈叫你回家要吃饭的，吃什么好呢？还是蛋炒饭吧。"
-            android:textColor="#222"
+            android:layout_height="wrap_content"
+            android:text="今天你妈妈叫你回家要吃饭的，今天你妈妈叫你回家要吃饭的，今天你妈妈叫你回家要吃饭的，吃什么好呢？还是蛋炒饭吧。"
+            android:textColor="#494949"
             android:textSize="14sp" />
 
         <TextView
@@ -46,7 +71,7 @@
             android:gravity="right"
             android:singleLine="true"
             android:text="开始时间：2015-05-23 23:11:11"
-            android:textColor="#444"
+            android:textColor="#1f3482"
             android:textSize="12sp" />
     </LinearLayout>
 

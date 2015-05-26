@@ -52,8 +52,6 @@ public class MainActivity extends Activity implements OnClickListener {
 	private FragmentTimeout mFragmentTimeout = null;
 	private FragmentTodo mFragmentTodo = null;
 
-	private List<Fragment> mFragments = null;
-
 	private View mBottomNavView = null;
 	private View mTopNavView = null;
 
@@ -64,9 +62,10 @@ public class MainActivity extends Activity implements OnClickListener {
 	private View btnHome = null;
 	private View btnTimeout = null;
 	private View btnTodo = null;
+	public  View vNothing = null;
 
 	private Button btnAdd = null;
-
+	private Button btnAddTask = null;
 	private TextView mTvTitle = null;
 
 	private ServiceConnection conn = new BackUpdateServiceConn();
@@ -131,6 +130,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		mTopBtnRightView = mTopNavView.findViewById(R.id.vTopBtnRight);
 		mTopBtnRightView.setVisibility(View.GONE);
 		btnAdd = (Button) mTopNavView.findViewById(R.id.btnAdd);
+		btnAddTask = (Button) findViewById(R.id.btnAddTask);
 
 		mTvTitle = (TextView) mTopNavView.findViewById(R.id.tvTopTitle);
 
@@ -146,7 +146,10 @@ public class MainActivity extends Activity implements OnClickListener {
 		btnTimeout.setOnClickListener(this);
 		btnTodo.setOnClickListener(this);
 		btnAdd.setOnClickListener(this);
+		btnAddTask.setOnClickListener(this);
 		mTvTitle.setOnClickListener(this);
+
+		vNothing = findViewById(R.id.vNothing);
 
 	}
 
@@ -158,8 +161,10 @@ public class MainActivity extends Activity implements OnClickListener {
 		switch (viewId) {
 		case R.id.btnHavedone:
 			changeFragmentPage(PAGE_HAVEDONE);
+			vNothing.setVisibility(View.GONE);
 			break;
 		case R.id.btnAdd:
+		case R.id.btnAddTask:
 			// changeFragmentPage(PAGE_ADD);
 			intent = new Intent(this, AddActivity.class);
 			startActivity(intent);
@@ -169,13 +174,17 @@ public class MainActivity extends Activity implements OnClickListener {
 			break;
 		case R.id.btnDoing:
 			changeFragmentPage(PAGE_DOING);
+			// vNothing.setVisibility(View.GONE);
 			break;
 		case R.id.btnTimeout:
 			changeFragmentPage(PAGE_TIMEOUT);
+			// vNothing.setVisibility(View.GONE);
 			break;
 		case R.id.btnTodo:
 			changeFragmentPage(PAGE_TODO);
+			// vNothing.setVisibility(View.GONE);
 			break;
+
 		case R.id.tvTopTitle:
 			intent = new Intent(this, AboutMeActivity.class);
 			startActivity(intent);
@@ -242,7 +251,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		default:
 			break;
 		}
-		
+
 		mFragmentHome.startAnim();
 
 		// mTransaction = mFragmentManager.beginTransaction();

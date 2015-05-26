@@ -10,22 +10,38 @@
         android:layout_height="50dp"
         layout="@layout/top_nav" />
 
-    <!-- <android.support.v4.view.ViewPager
-        android:id="@+id/viewpager"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="60dp"
-        android:layout_marginTop="50dp" >
-    </android.support.v4.view.ViewPager> -->
-    
-    <FrameLayout 
+    <FrameLayout
         android:id="@+id/container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="60dp"
-        android:layout_marginTop="50dp"
-        
-        ></FrameLayout>
+        android:layout_marginTop="50dp" >
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/vNothing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center_horizontal"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/btnAddTask"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@drawable/center_add_btn_selector" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:gravity="center"
+            android:text="您当前没有任务，点击右上角添加！"
+            android:textColor="#2196f3"
+            android:textSize="20sp"
+            android:visibility="gone" />
+    </LinearLayout>
 
     <include
         android:id="@+id/vBottom"

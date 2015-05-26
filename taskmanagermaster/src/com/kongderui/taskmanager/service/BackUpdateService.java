@@ -141,7 +141,6 @@ public class BackUpdateService extends Service {
 	}
 
 	class ReceiverNotyfication extends BroadcastReceiver {
-
 		@Override
 		public void onReceive(Context context, Intent intent) {
 
@@ -178,7 +177,6 @@ public class BackUpdateService extends Service {
 		Intent sendIntent = new Intent(Constant.RECEIVER_UPDATE_UI);
 		sendIntent.putExtra(Constant.RECEIVER_NEED_UPDATE_UI_KEY, true);
 		sendBroadcast(sendIntent);
-
 	}
 
 }
